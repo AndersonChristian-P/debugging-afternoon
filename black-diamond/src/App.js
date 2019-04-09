@@ -22,24 +22,22 @@ class App extends Component {
         });
       });
   }
-  addToCart(item) {
+  addToCart = (item) => {
     this.setState({
       cart: [...this.state.cart, item]
     });
   }
-  removeFromCart(index) {
+  removeFromCart = (index) => {
     let cartCopy = this.state.cart.slice();
     cartCopy.splice(index, 1);
     this.setState({
       cart: cartCopy
     });
   }
-  navigate(location) {
-    if (location === "cart") {
-      this.state.showCart = true;
-    } else {
-      this.state.showCart = false;
-    }
+  navigate = (location) => {
+
+    return (location === "cart" ? this.setState({ showCart: true }) : this.setState({ showCart: false }))
+
   }
   render() {
     const { products, cart, showCart } = this.state;
@@ -50,8 +48,8 @@ class App extends Component {
           {showCart ? (
             <ShoppingCart cart={cart} removeFromCart={this.removeFromCart} />
           ) : (
-            <StoreFront products={products} addToCart={this.addToCart} />
-          )}
+              <StoreFront products={products} addToCart={this.addToCart} />
+            )}
         </div>
       </div>
     );
